@@ -20,7 +20,8 @@ async def my_event_handler(event):
     hash = re.findall("0x........................................", string)
     hash = hash[0]
     liquidity = re.findall("Liquidity:..[0-998].[0-99][0-99] BNB",string)
-    wartosc_liq = liquidity[0]
+    g = re.findall("[0-998].[0-99][0-99]",liquidity[0])
+    wartosc_liq = g[0]
     sell = re.findall("Slippage...........", string)
     buy = re.findall("Slippage..........", string)
 
