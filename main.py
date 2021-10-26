@@ -28,7 +28,7 @@ async def my_event_handler(event):
         c = re.findall("[0-99]",n)
         o = c[0]
     y += int(o)
-    slip =  y
+    slip = y
 
     if liqudity_kiedy < wartosc_liq:
         if slip > wartosc_kiedy_kupisz:
