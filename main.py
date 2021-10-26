@@ -22,15 +22,13 @@ async def my_event_handler(event):
     liquidity = re.findall("Liquidity:..[0-998].[0-99][0-99] BNB",string)
     g = re.findall("[0-998].[0-99][0-99]",liquidity[0])
     wartosc_liq = g[0]
-    sell = re.findall("Slippage...........", string)
-    buy = re.findall("Slippage..........", string)
-
-    buy_v = re.findall("[0-99]%", buy[0])
-    buy_slippage = buy_v[0]
-
-    sell_v = re.findall("[0-99]%", sell[0])
-    sell_slippage = sell_v[0]
-    slip =  sell_slippage + buy_slippage
+    g1 = re.findall("Slippage.*[0-99]",string)
+    y = 0
+    for n in g1:
+        c = re.findall("[0-99]",n)
+        o = c[0]
+    y += int(o)
+    slip =  y
 
     if liqudity_kiedy < wartosc_liq:
         if slip > wartosc_kiedy_kupisz:
