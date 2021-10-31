@@ -74,7 +74,7 @@ def trans(hash,klucz,swapowane_bnp,adrespublicznyportfela):
         'from': sender_address,
         'value': web3.toWei(swapowane_bnp, 'ether'),  # This is the Token(BNB) amount you want to Swap from
         'gas': 250000,
-        'gasPrice': web3.toWei('5', 'gwei'),
+        'gasPrice': web3.toWei('40', 'gwei'),
         'nonce': nonce,
     })
 
