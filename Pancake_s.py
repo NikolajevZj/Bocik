@@ -1,7 +1,7 @@
 from web3 import Web3
 import time
 
-def sellt(hash,klucz,swapowane_bnp,adres_publiczny):
+def sellt(hash,klucz,adres_publiczny):
     bsc = "https://bsc-dataseed.binance.org/"
     web3 = Web3(Web3.HTTPProvider(bsc))
 
@@ -43,14 +43,14 @@ def sellt(hash,klucz,swapowane_bnp,adres_publiczny):
     print("Balance: " + str(readable) + " " + symbol)
 
     # Enter amount of token to sell
-    tokenValue = web3.toWei(swapowane_bnp, 'ether')
+    tokenValue = balance
 
     # Approve Token before Selling
     tokenValue2 = web3.fromWei(tokenValue, 'ether')
     start = time.time()
     approve = sellTokenContract.functions.approve(panRouterContractAddress, balance).buildTransaction({
         'from': sender_address,
-        'gasPrice': web3.toWei('5', 'gwei'),
+        'gasPrice': web3.toWei('40', 'gwei'),
         'nonce': web3.eth.get_transaction_count(sender_address),
     })
 
@@ -59,7 +59,7 @@ def sellt(hash,klucz,swapowane_bnp,adres_publiczny):
     print("Approved: " + web3.toHex(tx_token))
 
     # Wait after approve 10 seconds before sending transaction
-    time.sleep(10)
+    time.sleep(120)
     print(f"Swapping {tokenValue2} {symbol} for BNB")
     # Swaping exact Token for ETH
 
@@ -71,7 +71,8 @@ def sellt(hash,klucz,swapowane_bnp,adres_publiczny):
 
     ).buildTransaction({
         'from': sender_address,
-        'gasPrice': web3.toWei('5', 'gwei'),
+        'gas' : 250000,
+        'gasPrice': web3.toWei('40', 'gwei'),
         'nonce': web3.eth.get_transaction_count(sender_address),
     })
 
