@@ -1,7 +1,6 @@
 from telethon import TelegramClient, events
 import re
 from Pancake_b import trans
-from Pancake_s import sellt
 import time
 
 api_id = 17775638
