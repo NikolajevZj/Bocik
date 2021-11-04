@@ -1,6 +1,7 @@
 from telethon import TelegramClient, events
 import re
 from Pancake_b import trans
+from Pancake_s import sellt
 import time
 
 api_id = 17775638
@@ -17,23 +18,25 @@ def check(traz):
     return traz
 def increase(traz):
     traz += 1
+    return traz
 def liq1(wartosc_liq):
-    if 300 < int(wartosc_liq) < 500:
-        liq = 18 - 0.03 * (wartosc_liq - 300)
+    if 300 <= int(wartosc_liq) < 500:
+        liq = 18 - 0.03 * (int(wartosc_liq) - 300)
         return liq
-    elif 100 < int(wartosc_liq) < 300:
-        liq = 25 - 0.035 * (wartosc_liq - 100)
+    if 100 <= int(wartosc_liq) < 300:
+        liq = 25 - 0.035 * (int(wartosc_liq) - 100)
         return liq
-    elif 50 < int(wartosc_liq) < 100:
-        liq = 35 - 0.14 * (wartosc_liq - 50)
+    if 50 <= int(wartosc_liq) < 100:
+        liq = 35 - 0.14 * (int(wartosc_liq) - 50)
         return liq
-
 
 print("Odpalam...")
 @client.on(events.NewMessage())
 async def my_event_handler(event):
     tra1 = check(traz)
-    if tra1 < 5:
+    if tra1 < 10:
+        if tra1 == 10:
+            print("Koniec")
         string = event.raw_text
         hash = re.findall("0x........................................", string)
         hash = hash[0]
@@ -51,31 +54,17 @@ async def my_event_handler(event):
             o = c[0]
             y += int(o)
         slip = y
-
+        print(wartosc_liq)
         if liqudity_kiedy > int(wartosc_liq) >= 50:
-            print("liquid dobry")
-            liq = liq1(int(wartosc_liq))
-            if int(liq) < wartosc_kiedy_kupisz:
+            print("Liquid dobry")
+            wartosc_liq = int(wartosc_liq)
+            liq = liq1(wartosc_liq)
+            if slip < liq:
                 trans(hash, klucz_prywatny, swapowane_bnp, adres_publiczny_portfela)
-                print("Kupione")
-                increase(traz)
+                time.sleep(20)
+                sellt(hash, klucz_prywatny,adres_publiczny_portfela)
+                print("Kupione i Sprzedane")
+                tra1 = increase(traz)
+                print(tra1)
         else:
             print("Transakcja odrzucona")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-client.start()
-client.run_until_disconnected()
