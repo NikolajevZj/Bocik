@@ -1,7 +1,7 @@
 from telethon import TelegramClient, events
 import re
 from Pancake_b import trans
-from Pancake_s import sellt
+
 import time
 
 api_id = 17775638
@@ -62,8 +62,7 @@ async def my_event_handler(event):
             if slip < liq:
                 trans(hash, klucz_prywatny, swapowane_bnp, adres_publiczny_portfela)
                 time.sleep(20)
-                sellt(hash, klucz_prywatny,adres_publiczny_portfela)
-                print("Kupione i Sprzedane")
+                print("Kupione")
                 tra1 = increase(traz)
                 print(tra1)
         else:
